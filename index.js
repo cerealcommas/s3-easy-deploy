@@ -58,6 +58,10 @@ function setup(options) {
     return Promise.reject('Must specify bucket');
   }
 
+  if (!config.acl) {
+    config.acl = 'private';
+  }
+
   config.concurrentRequests = config.concurrentRequests || 10;
 
   s3 = new AWS.S3();
