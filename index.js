@@ -59,7 +59,7 @@ function setup(options) {
   }
 
   if (!config.acl) {
-    config.acl = 'private';
+    config.acl = 'public-read';
   }
 
   config.concurrentRequests = config.concurrentRequests || 10;
