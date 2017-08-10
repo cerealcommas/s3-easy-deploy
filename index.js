@@ -3,6 +3,7 @@
 const Async = require('async');
 const AWS = require('aws-sdk');
 const Crypto = require('crypto');
+const chalk = require('chalk');
 const Fs = require('fs');
 const Glob = require('glob');
 const Mime = require('mime');
@@ -19,11 +20,11 @@ let status = {
 
 module.exports.deploy = (options, callback) => {
   return setup(options).then(startDeploy).then(() => {
-    console.log('S3 deploy completed');
+    console.log(chalk.green.bold(`Deployed ${config.publicRoot} to ${config.bucket} on S3!`));
     if (callback) {
-      return callback(null, 'success!');
+      return callback(null, '');
     }
-    return Promise.resolve('success!');
+    return Promise.resolve('');
   }).catch(error => {
     console.error(('error: '+error).red);
     if (callback) {
