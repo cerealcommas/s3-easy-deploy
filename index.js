@@ -23,15 +23,15 @@ module.exports.deploy = (options, callback) => {
     if (callback) {
       return callback(null, 'success!');
     }
-    return Promise.resolve('success!')
+    return Promise.resolve('success!');
   }).catch(error => {
     console.error(('error: '+error).red);
     if (callback) {
       return callback(error);
     }
     return Promise.reject(error);
-  })
-}
+  });
+};
 
 function setup(options) {
   config = options;
@@ -42,7 +42,7 @@ function setup(options) {
   } else {
     return Promise.reject('Must specify profile or accessKeyId and secretAccessKey');
   }
-  
+
   if (config.region) {
     AWS.config.region = config.region;
   } else {
@@ -114,7 +114,7 @@ function uploadFile(file, callback) {
   const params = {
     Bucket: config.bucket,
     Key: key,
-    ACL: 'public-read',
+    ACL: config.acl,
     Body: file.body,
     ContentType: file.type,
     Metadata: {
